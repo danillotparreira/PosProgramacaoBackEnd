@@ -1,11 +1,13 @@
 package br.ufg.inf.backend.calculadora;
 
+import java.io.IOException;
+
+import br.ufg.inf.backend.utils.BackEndUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  *
@@ -17,11 +19,11 @@ public class CalculadoraServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			String operacao = validaCampoString(req.getParameter("operacao"), "operacao");
-			Double num1 = validaDouble(req.getParameter("num1"), "num1");
-			Double num2 = validaDouble(req.getParameter("num2"), "num2");
+			String operacao = BackEndUtils.validaCampoString(req.getParameter("operacao"), "operacao");
+			Double num1 = BackEndUtils.validaDouble(req.getParameter("num1"), "num1");
+			Double num2 = BackEndUtils.validaDouble(req.getParameter("num2"), "num2");
 			Double total;
 			String msg;
 			switch (operacao) {
@@ -47,22 +49,6 @@ public class CalculadoraServlet extends HttpServlet {
 			resp.getWriter().append(msg);
 		} catch (RuntimeException e) {
 			resp.getWriter().append(e.getMessage());
-		}
-	}
-
-	private String validaCampoString(String operacao, String nomeCampo) {
-		if (operacao == null || operacao.isBlank()) {
-			throw new RuntimeException(String.format("O campo '%s' deve ser preenchido.", nomeCampo));
-		}
-		return operacao.trim();
-	}
-
-	private Double validaDouble(String numero, String nomeCampo) {
-		validaCampoString(numero, nomeCampo);
-		try {
-			return Double.valueOf(numero);
-		} catch (NumberFormatException e) {
-			throw new RuntimeException(String.format("O campo '%s' deve ser um número válido.", nomeCampo));
 		}
 	}
 

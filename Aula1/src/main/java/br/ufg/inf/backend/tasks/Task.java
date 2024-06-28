@@ -1,5 +1,7 @@
 package br.ufg.inf.backend.tasks;
 
+import java.util.Objects;
+
 public class Task {
 	private long id;
 	private String nome;
@@ -10,6 +12,12 @@ public class Task {
 
 	public Task(String nome) {
 		super();
+		this.nome = nome;
+	}
+
+	public Task(long id, String nome) {
+		super();
+		this.id = id;
 		this.nome = nome;
 	}
 
@@ -27,6 +35,23 @@ public class Task {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		return Objects.equals(nome, other.nome);
 	}
 
 }

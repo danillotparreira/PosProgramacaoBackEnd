@@ -65,13 +65,13 @@ public class TaskServlet extends HttpServlet {
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String task = BackEndUtils.validaCampoString(req.getParameter("task"), "task");
-			long id = BackEndUtils.validaInteger(req.getParameter("id"), "id");
+			long id = BackEndUtils.validaInteger(req.getParameter("index"), "index");
 			for (Task tarefa : tarefas) {
 				if (tarefa.getId() == id) {
 					validaTask(new Task(task));
 					String nomeAnterior = tarefa.getNome();
 					tarefa.setNome(task);
-					resp.getWriter().append(String.format("A tarefa com o id %d '%s' foi atualizado para '%s'.",
+					resp.getWriter().append(String.format("A tarefa com o index %d '%s' foi atualizado para '%s'.",
 							tarefa.getId(), nomeAnterior, tarefa.getNome()));
 					return;
 				}
@@ -99,7 +99,7 @@ public class TaskServlet extends HttpServlet {
 				return task;
 			}
 		}
-		throw new RuntimeException(String.format("Não foi localizado a tarefa com id %d", id));
+		throw new RuntimeException(String.format("Não foi localizado a tarefa com index %d", id));
 	}
 
 }

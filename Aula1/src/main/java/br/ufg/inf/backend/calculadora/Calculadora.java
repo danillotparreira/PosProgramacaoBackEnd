@@ -33,14 +33,14 @@ public class Calculadora {
 
     public static double dividir(int a, int b) {
         if (b == 0) {
-            throw new RuntimeException("Não é possível dividir por 0");
+            throw new ParreiraException("Não é possível dividir por 0");
         }
         return a / b;
     }
 
     public static double dividir(double a, double b) {
         if (b == 0.0) {
-            throw new RuntimeException("Nao e possivel dividir por 0.");
+            throw new ParreiraException("Nao e possivel dividir por 0.");
         }
         return a / b;
     }

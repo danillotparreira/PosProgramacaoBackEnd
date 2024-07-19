@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufg.inf.backend.utils.BackEndUtils;
+import br.ufg.inf.backend.utils.ParreiraException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +45,7 @@ public class TaskSmsServlet extends HttpServlet {
 			Task nova = tarefaService.adicionar(task);
 			resp.getWriter()
 					.append(String.format("A tarefa %s foi adicionado com o id %d.", nova.getNome(), nova.getId()));
-		} catch (RuntimeException e) {
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}
@@ -57,7 +58,7 @@ public class TaskSmsServlet extends HttpServlet {
 			Task tarefa = tarefaService.atualizar(id, task);
 			resp.getWriter().append(String.format("A tarefa com o index %d foi atualizado para '%s'.",
 					tarefa.getId(), tarefa.getNome()));
-		} catch (RuntimeException e) {
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}
@@ -68,7 +69,7 @@ public class TaskSmsServlet extends HttpServlet {
 			long id = BackEndUtils.validaInteger(req.getParameter("id"), "id");
 			tarefaService.remover(id);
 			resp.getWriter().append(String.format("A tarefa com o id %d foi removida.", id));
-		} catch (RuntimeException e) {
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}

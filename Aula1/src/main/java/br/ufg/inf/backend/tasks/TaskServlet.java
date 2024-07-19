@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufg.inf.backend.utils.BackEndUtils;
+import br.ufg.inf.backend.utils.ParreiraException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,16 +30,14 @@ public class TaskServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Lista de Tarefas\n");
+		resp.getWriter().append("Lista de Tarefas\n");
 		if (!tarefas.isEmpty()) {
 			for (Task task : tarefas) {
-				sb.append(String.format("%d - %s\n", task.getId(), task.getNome()));
+				resp.getWriter().append(String.format("%d - %s\n", task.getId(), task.getNome()));
 			}
 		} else {
-			sb.append("Nenhuma tarefa cadastrada!");
+			resp.getWriter().append("Nenhuma tarefa cadastrada!");
 		}
-		resp.getWriter().append(sb.toString());
 	}
 
 	@Override
@@ -49,15 +48,15 @@ public class TaskServlet extends HttpServlet {
 			validaTask(nova);
 			tarefas.add(nova);
 			resp.getWriter()
-					.append(String.format("A tarefa %s foi adicionado com o id %d.", nova.getNome(), nova.getId()));
-		} catch (RuntimeException e) {
+					.append(String.format("A tarefa '%s' foi adicionado com o id %d.", nova.getNome(), nova.getId()));
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}
 
 	private void validaTask(Task task) {
 		if (tarefas.contains(task)) {
-			throw new RuntimeException(String.format("A tarefa %s já está incluida!", task.getNome()));
+			throw new ParreiraException(String.format("A tarefa '%s' já está incluida!", task.getNome()));
 		}
 	}
 
@@ -77,7 +76,7 @@ public class TaskServlet extends HttpServlet {
 				}
 			}
 			resp.getWriter().append(String.format("A tarefa com o id %d não está incluida na lista.", id));
-		} catch (RuntimeException e) {
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}
@@ -88,7 +87,7 @@ public class TaskServlet extends HttpServlet {
 			long id = BackEndUtils.validaInteger(req.getParameter("id"), "id");
 			tarefas.remove(buscaTask(id));
 			resp.getWriter().append(String.format("A tarefa com o id %d foi removida.", id));
-		} catch (RuntimeException e) {
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}
@@ -96,10 +95,10 @@ public class TaskServlet extends HttpServlet {
 	private Task buscaTask(long id) {
 		for (Task task : tarefas) {
 			if (task.getId() == id) {
-				return task;
+				return task;	
 			}
 		}
-		throw new RuntimeException(String.format("Não foi localizado a tarefa com index %d", id));
+		throw new ParreiraException(String.format("Não foi localizado a tarefa com index %d", id));
 	}
 
 }

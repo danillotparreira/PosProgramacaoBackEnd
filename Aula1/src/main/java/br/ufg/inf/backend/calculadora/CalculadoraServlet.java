@@ -3,6 +3,7 @@ package br.ufg.inf.backend.calculadora;
 import java.io.IOException;
 
 import br.ufg.inf.backend.utils.BackEndUtils;
+import br.ufg.inf.backend.utils.ParreiraException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -43,11 +44,11 @@ public class CalculadoraServlet extends HttpServlet {
 				total = Calculadora.dividir(num1, num2);
 				msg = String.format("%.2f / %.2f = %.2f\n", num1, num2, total);
 			default:
-				throw new RuntimeException(
+				throw new ParreiraException(
 						"A operação não existe, escolha entre as operações: somar, subtrair, multiplicar e dividir");
 			}
 			resp.getWriter().append(msg);
-		} catch (RuntimeException e) {
+		} catch (ParreiraException e) {
 			resp.getWriter().append(e.getMessage());
 		}
 	}

@@ -3,6 +3,8 @@ package br.ufg.inf.backend.ioc;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufg.inf.backend.utils.ParreiraException;
+
 public class TarefaService {
 	private NotificacaoService notificacao;
 	private List<Task> tarefas;
@@ -25,10 +27,10 @@ public class TarefaService {
 	public Task atualizar(long id, String nomeTarefa) {
 		Task tarefaEncontrada = buscaTarefa(id);
 		if (tarefaEncontrada == null) {
-			throw new RuntimeException(String.format("A tarefa com o index %d não está incluida na lista.", id));
+			throw new ParreiraException(String.format("A tarefa com o index %d não está incluida na lista.", id));
 		}
 		if (tarefaEncontrada.getNome().equals(nomeTarefa)) {
-			throw new RuntimeException("A tarefa que está tentando atualizar é igual ao inserida.");
+			throw new ParreiraException("A tarefa que está tentando atualizar é igual ao inserida.");
 		}
 		tarefaNaoIncluida(nomeTarefa);
 		tarefaEncontrada.setNome(nomeTarefa);
@@ -51,9 +53,9 @@ public class TarefaService {
 		tarefaNaoIncluida(task);
 	}
 
-	private void tarefaNaoIncluida(Task task) {
+	private void tarefaNaoIncluida(Task task){
 		if (tarefas.contains(task)) {
-			throw new RuntimeException(String.format("A tarefa %s já está incluida!", task.getNome()));
+			throw new ParreiraException(String.format("A tarefa %s já está incluida!", task.getNome()));
 		}
 	}
 
@@ -63,7 +65,7 @@ public class TarefaService {
 				return task;
 			}
 		}
-		throw new RuntimeException(String.format("Não foi localizado a tarefa com index %d", id));
+		throw new ParreiraException(String.format("Não foi localizado a tarefa com index %d", id));
 	}
 
 	private long lastId() {

@@ -4,7 +4,7 @@ public class BackEndUtils {
 	
 	public static String validaCampoString(String operacao, String nomeCampo) {
 		if (operacao == null || operacao.isBlank()) {
-			throw new RuntimeException(String.format("O campo '%s' deve ser preenchido.", nomeCampo));
+			throw new ParreiraException(String.format("O campo '%s' deve ser preenchido.", nomeCampo));
 		}
 		return operacao.trim();
 	}
@@ -14,7 +14,7 @@ public class BackEndUtils {
 		try {
 			return Double.valueOf(numero);
 		} catch (NumberFormatException e) {
-			throw new RuntimeException(String.format("O campo '%s' deve ser um número válido.", nomeCampo));
+			throw new ParreiraException(String.format("O campo '%s' deve ser um número válido.", nomeCampo));
 		}
 	}
 
@@ -23,7 +23,7 @@ public class BackEndUtils {
 		try {
 			return Integer.valueOf(numero);
 		} catch (NumberFormatException e) {
-			throw new RuntimeException(String.format("O campo '%s' deve ser um número inteiro válido.", nomeCampo));
+			throw new ParreiraException(String.format("O campo '%s' deve ser um número inteiro válido.", nomeCampo));
 		}
 	}
 

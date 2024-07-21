@@ -8,13 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TagService extends GenericService<Tag> {
-
-    @Autowired
-    private TagRepository repository;
-
-    @Override
-    protected JpaRepository<Tag, Long> getRepository() {
-        return repository;
-    }
+public class TagService extends GenericService<Tag, TagRepository> {
+//
+//    @Autowired
+//    private TagRepository repository;
+//
+//    @Override
+//    protected JpaRepository<Tag, Long> getRepository() {
+//        return repository;
+//    }
 }

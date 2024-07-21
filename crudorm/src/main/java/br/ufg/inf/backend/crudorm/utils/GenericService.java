@@ -8,24 +8,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public abstract class GenericService<E extends SuperEntidade> {
+public abstract class GenericService<E extends SuperEntidade,R extends JpaRepository<E, Long>> {
 
-    protected abstract JpaRepository<E, Long> getRepository();
+    @Autowired
+    protected R repository;
 
     public E findById(Long id) {
-        return getRepository().findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     public List<E> findAll() {
-        return getRepository().findAll();
+        return repository.findAll();
     }
 
     public E save(E entidade) {
-        return getRepository().save(entidade);
+        return repository.save(entidade);
     }
 
     public void delete(Long id) {
-        getRepository().deleteById(id);
+        repository.deleteById(id);
     }
 
 }

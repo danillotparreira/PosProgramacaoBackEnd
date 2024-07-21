@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProdutoService extends GenericService<Produto> {
+public class ProdutoService extends GenericService<Produto, ProdutoRepository> {
 
-    @Autowired
-    private ProdutoRepository repository;
-
-    @Override
-    protected JpaRepository<Produto, Long> getRepository() {
-        return repository;
-    }
+//    @Autowired
+//    private ProdutoRepository repository;
+//
+//    @Override
+//    protected JpaRepository<Produto, Long> getRepository() {
+//        return repository;
+//    }
 }

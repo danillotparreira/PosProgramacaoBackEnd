@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/categorias")
-public class CategoriaRest extends GenericRest<Categoria> {
-    @Autowired
-    private CategoriaService service;
-
-    @Override
-    protected GenericService<Categoria> getService() {
-        return service;
-    }
+public class CategoriaRest extends GenericRest<Categoria, CategoriaService> {
+//    @Autowired
+//    private CategoriaService service;
+//
+//    @Override
+//    protected GenericService<Categoria> getService() {
+//        return service;
+//    }
 
     @Override
     protected void atualizarEntidade(Categoria entidade, Categoria entidadeAtualizada) {

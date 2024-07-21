@@ -2,18 +2,15 @@ package br.ufg.inf.backend.crudorm.model;
 
 import br.ufg.inf.backend.crudorm.model.abstracts.SuperEntidade;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Produto  extends SuperEntidade {
 
     private String nome;

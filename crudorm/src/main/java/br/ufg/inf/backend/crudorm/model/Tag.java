@@ -13,20 +13,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto {
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private double preco;
 
-    @ManyToOne
-    private Categoria categoria;
-
-    @ManyToMany
-    @JoinTable(
-            name = "produto_tag",
-            joinColumns = @JoinColumn(name = "produto_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> tags;
+    @ManyToMany(mappedBy = "tags")
+    private List<Produto> produtos;
 }

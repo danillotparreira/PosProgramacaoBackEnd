@@ -17,6 +17,7 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Preço</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,13 @@
         <td th:text="${produto.id}"/>
         <td th:text="${produto.nome}"/>
         <td th:text="${produto.preco}"/>
+        <td>
+            <a th:href="@{'/produtos/editar?id=' + ${produto.id}}" class="botao-acao">Editar</a>
+            <form th:action="@{'/produtos/deletar'}" method="post" style="display:inline;" >
+                <input type="hidden" name="id" th:value="${produto.id}"/>
+                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este produto?');" class="botao-acao">Deletar</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

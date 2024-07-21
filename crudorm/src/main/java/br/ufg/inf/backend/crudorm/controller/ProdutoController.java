@@ -2,25 +2,28 @@ package br.ufg.inf.backend.crudorm.controller;
 
 
 import br.ufg.inf.backend.crudorm.model.Produto;
+import br.ufg.inf.backend.crudorm.service.ProdutoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class ProdutoController {
+
+    @Autowired
+    private ProdutoService produtoService;
+
     @GetMapping("/produtos")
-    public String listarProdutos(Model model) {
-        // Simulando a obtenção de produtos do banco de dados
-        List<Produto> produtos = Arrays.asList(
-                new Produto(1L, "Notebook", 2000.00),
-                new Produto(2L, "Smartphone", 1000.00)
-        );
-        model.addAttribute("produtos", produtos);
+    public String listarProdutos(Model model, @RequestParam(required = false) String sucesso) {
+        model.addAttribute("produtos", produtoService.findall());
+        model.addAttribute("sucesso", sucesso);
         return "produtos";
     }
 
@@ -30,14 +33,12 @@ public class ProdutoController {
     }
 
     @PostMapping("/produtos")
-    public String adicionarProduto(@RequestParam String nome, @RequestParam double preco, Model model) {
-        // Simulando a adição de um produto ao banco de dados
+    public String adicionarProduto(@RequestParam String nome, @RequestParam double preco, RedirectAttributes redirectAttributes) {
         Produto produto = new Produto();
         produto.setNome(nome);
         produto.setPreco(preco);
-        // Adicionando o produto à lista de produtos
-        model.addAttribute("produtos", Arrays.asList(produto));
-        model.addAttribute("sucesso", "Produto adicionado com sucesso!");
-        return "produtos";
+        produtoService.save(produto);
+        redirectAttributes.addAttribute("sucesso", "Produto adicionado com sucesso!");
+        return "redirect:/produtos";
     }
 }

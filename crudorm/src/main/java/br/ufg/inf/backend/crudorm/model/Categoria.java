@@ -1,5 +1,6 @@
 package br.ufg.inf.backend.crudorm.model;
 
+import br.ufg.inf.backend.crudorm.model.abstracts.SuperEntidade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +14,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Categoria {
+public class Categoria extends SuperEntidade {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nome;
     @OneToMany(mappedBy = "categoria")
     private List<Produto> produtos;

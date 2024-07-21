@@ -21,7 +21,7 @@ public class ProdutoController {
 
     @GetMapping()
     public String listarProdutos(Model model, @RequestParam(required = false) String sucesso) {
-        model.addAttribute("produtos", produtoService.findall());
+        model.addAttribute("produtos", produtoService.findAll());
         model.addAttribute("sucesso", sucesso);
         return "produtos";
     }

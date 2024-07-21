@@ -1,5 +1,6 @@
 package br.ufg.inf.backend.crudorm.model;
 
+import br.ufg.inf.backend.crudorm.model.abstracts.SuperEntidade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,10 +14,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Tag extends SuperEntidade {
+
     private String nome;
 
     @ManyToMany(mappedBy = "tags")

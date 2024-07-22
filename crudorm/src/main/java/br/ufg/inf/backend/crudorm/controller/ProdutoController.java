@@ -33,9 +33,10 @@ public class ProdutoController {
 
     @PostMapping()
     public String adicionarProduto(@RequestParam String nome, @RequestParam double preco, RedirectAttributes redirectAttributes) {
-        Produto produto = new Produto();
-        produto.setNome(nome);
-        produto.setPreco(preco);
+        Produto produto = Produto.builder().nome(nome).preco(preco).build();
+//        Produto produto = new Produto();
+//        produto.setNome(nome);
+//        produto.setPreco(preco);
         produtoService.save(produto);
         redirectAttributes.addAttribute("sucesso", "Produto adicionado com sucesso!");
         return "redirect:/produtos";

@@ -8,9 +8,9 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Categoria extends SuperEntidade {
 
     private String nome;

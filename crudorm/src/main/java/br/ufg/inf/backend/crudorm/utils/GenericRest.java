@@ -47,3 +47,4 @@ public abstract class GenericRest<T extends SuperEntidade, R extends GenericServ
 
     protected abstract void atualizarEntidade(T entidade, T entidadeAtualizada);
 }
+

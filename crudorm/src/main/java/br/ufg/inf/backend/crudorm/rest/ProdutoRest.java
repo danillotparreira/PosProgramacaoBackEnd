@@ -9,13 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoRest extends GenericRest<Produto, ProdutoService> {
-//    @Autowired
-//    private ProdutoService service;
-//
-//    @Override
-//    protected GenericService<Produto> getService() {
-//        return service;
-//    }
 
     @Override
     protected void atualizarEntidade(Produto entidade, Produto entidadeAtualizada) {

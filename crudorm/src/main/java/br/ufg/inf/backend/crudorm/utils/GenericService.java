@@ -30,3 +30,4 @@ public abstract class GenericService<E extends SuperEntidade,R extends JpaReposi
     }
 
 }
+

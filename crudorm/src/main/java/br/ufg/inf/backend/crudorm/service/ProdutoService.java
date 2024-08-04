@@ -12,11 +12,5 @@ import java.util.List;
 @Service
 public class ProdutoService extends GenericService<Produto, ProdutoRepository> {
 
-//    @Autowired
-//    private ProdutoRepository repository;
-//
-//    @Override
-//    protected JpaRepository<Produto, Long> getRepository() {
-//        return repository;
-//    }
+
 }

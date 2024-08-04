@@ -4,7 +4,9 @@ import br.ufg.inf.backend.crudorm.model.Produto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class ProdutoServiceTest {
@@ -12,15 +14,15 @@ public class ProdutoServiceTest {
     private ProdutoService service;
 
     @Test
-    public void testAddProduto() {
+    public void testAddProduct() {
         String nome = "Teste";
-        double preco = 100.0;
+        double preco = 100;
 
-        Produto produto = Produto.builder().nome(nome).preco(preco).build();
+        Produto produto = new Produto(null, nome, preco);
         Produto produtoSalvo = service.save(produto);
-
-//        Assert.assertNotNull(produtoSalvo);
-
+        assertNotNull(produtoSalvo);
+        assertNotNull(produtoSalvo.getId());
+        assertEquals(nome, produtoSalvo.getNome());
+        assertEquals(preco, produtoSalvo.getPreco());
     }
-
 }

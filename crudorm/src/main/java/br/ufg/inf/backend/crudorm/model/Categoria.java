@@ -3,6 +3,7 @@ package br.ufg.inf.backend.crudorm.model;
 import br.ufg.inf.backend.crudorm.model.abstracts.SuperEntidade;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Categoria extends SuperEntidade {
 
     private String nome;

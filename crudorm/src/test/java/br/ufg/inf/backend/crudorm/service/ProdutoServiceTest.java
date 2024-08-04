@@ -18,7 +18,7 @@ public class ProdutoServiceTest {
         String nome = "Teste";
         double preco = 100;
 
-        Produto produto = new Produto(null, nome, preco);
+        Produto produto = Produto.builder().nome(nome).preco(preco).build();
         Produto produtoSalvo = service.save(produto);
         assertNotNull(produtoSalvo);
         assertNotNull(produtoSalvo.getId());
